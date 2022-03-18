@@ -1,6 +1,6 @@
-lst = []
-num = int(input('How many numbers: '))
-for n in range(num):
-    numbers = int(input('Enter number '))
-    lst.append(numbers)
-print("Sum of elements in given list is :", sum(lst))
+number = 0
+while number < 3:
+    number += 1
+    print(number)
+else:
+    print("yea")

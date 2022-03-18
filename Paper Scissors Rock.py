@@ -1,46 +1,100 @@
 def main_routine():
-    choice = 0
-    comp_choice = 0
-    choice_list = [1, 2, 3]
-    print("Welcome to Paper Scissors Rock")
-    player_name = input("Enter your name: ")
-    print(f"Hello {player_name} choose one of the options below: ")
-    global comp_choice
-    comp_choice = random.choice(choice_list)
-    print("1: Paper")
-    print("2: Scissors")
-    print("3: Rock")
-    choice = int(input("Enter your choice from number 1-3: "))
+    import random
+    while comp_score < 3 and player_score < 3:
+        global comp_choice
+        comp_choice = random.randint(1, 3)
+        print("Choose one of the options below:")
+        print("1: Paper")
+        print("2: Scissors")
+        print("3: Rock")
+        choice = int(input("Enter your choice from 1-3"))
 
-    if choice == 1:
-        paper()
+        if choice == comp_choice:
+            game_tie()
 
-    if choice == 2:
-        scissors()
+        elif choice == 1:
+            paper()
 
-    if choice == 3:
-        rock()
+        elif choice == 2:
+            scissors()
+
+        elif choice == 3:
+            rock()
+        else:
+            print("That number is invalid")
+    else:
+        game_over()
 
 
+def game_tie():
+    print("The result of the game was a tie.")
+    print(f"The current score is Player Score:{player_score}, Computer Score:{comp_score}")
 
 
 def paper():
-    if comp_choice == 1:
-        print("The computer did paper: Tie")
-    elif comp_choice == 2:
-        print("The computer did scissors: Loss")
+    global comp_score
+    global player_score
+    if comp_choice == 2:
+        print("The computer is the winner of this game.")
+        comp_score += 1
+        print(f"The current score is Player Score:{player_score}, Computer Score:{comp_score}")
     else:
-        print("The computer did rock: Win")
+        print("You are the winner of this game.")
+        player_score += 1
+        print(f"The current score is Player Score:{player_score}, Computer Score:{comp_score}")
 
 
 def scissors():
-    print("Scissors")
+    global comp_score
+    global player_score
+    if comp_choice == 3:
+        print("The computer is the winner of this game.")
+        comp_score += 1
+        print(f"The current score is Player Score:{player_score}, Computer Score:{comp_score}")
+    else:
+        print("You are the winner of this game.")
+        player_score += 1
+        print(f"The current score is Player Score:{player_score}, Computer Score:{comp_score}")
 
 
 def rock():
-    print("Rock")
+    global comp_score
+    global player_score
+    if comp_choice == 1:
+        print("The computer is the winner of this game.")
+        comp_score += 1
+        print(f"The current score is Player Score:{player_score}, Computer Score:{comp_score}")
+    else:
+        print("You are the winner of this game.")
+        player_score += 1
+        print(f"The current score is Player Score:{player_score}, Computer Score:{comp_score}")
+
+
+def game_over():
+    global comp_score
+    global player_score
+    if comp_score == 3:
+        print("The computer is the winner of this match!")
+        rematch = input("Do you want a rematch(Y: yes, N: no): ").upper()
+        if rematch == "Y":
+            comp_score = 0
+            player_score = 0
+            main_routine()
+        else:
+            print("Thank you for playing Paper Scissors Rock")
+    elif player_score == 3:
+        print("You are the winner of this match!")
+        rematch = input("Do you want a rematch(Y: yes, N: no): ").upper()
+        if rematch == "Y":
+            comp_score = 0
+            player_score = 0
+            main_routine()
+        else:
+            print("Thank you for playing Paper Scissors Rock")
 
 
 # Main Routine
-import random
+global comp_choice
+player_score = 0
+comp_score = 0
 main_routine()
